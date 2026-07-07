@@ -1,0 +1,8 @@
+#include <stdio.h>
+
+int main(){
+    int x=2,y=3,z=3,k=1;
+    float a = 3.0*x/y - z+k;
+    printf("The value of a is %f", a);
+    return 0;
+}
