@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>happy_birthday(Adiba)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@400;500;600&family=Karla:wght@400;500&display=swap');
+
+  :root{
+    --plum-950:#2b1a33;
+    --plum-900:#3a2242;
+    --plum-800:#4a2c52;
+    --rose-400:#e8a5ab;
+    --rose-300:#f0c4c8;
+    --gold-400:#d9ad6b;
+    --cream-50:#faf3f5;
+    --ink-mute:#c9b7cf;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(232,165,171,0.10), transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(217,173,107,0.10), transparent 50%),
+      var(--plum-950);
+    font-family:'Karla', sans-serif;
+    color:var(--cream-50);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+    overflow-x:hidden;
+  }
+  .stage{
+    width:100%;
+    max-width:640px;
+  }
+
+  /* ---- Terminal card ---- */
+  .terminal{
+    background:linear-gradient(180deg, var(--plum-900), var(--plum-800));
+    border:1px solid rgba(232,165,171,0.18);
+    border-radius:14px;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.6);
+    overflow:hidden;
+  }
+  .term-bar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 16px;
+    background:rgba(0,0,0,0.18);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .dot{width:10px;height:10px;border-radius:50%;}
+  .dot.r{background:#e8828c;}
+  .dot.y{background:#e8c47f;}
+  .dot.g{background:#8fcf9b;}
+  .term-title{
+    margin-left:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-mute);
+    letter-spacing:0.02em;
+  }
+  .term-body{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    line-height:1.85;
+    padding:22px 22px 26px;
+    min-height:260px;
+  }
+  .kw{color:#e8a5ab;}
+  .str{color:#d9ad6b;}
+  .fn{color:#a8c9e8;}
+  .cm{color:var(--ink-mute); font-style:italic;}
+  .line{opacity:0; animation:reveal 0.4s ease forwards;}
+  .cursor{
+    display:inline-block;
+    width:8px; height:16px;
+    background:var(--rose-300);
+    vertical-align:-3px;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes reveal{ to{opacity:1;} }
+  @keyframes blink{ 50%{opacity:0;} }
+
+  .run-btn{
+    margin-top:6px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    background:transparent;
+    color:var(--rose-300);
+    border:1px solid rgba(232,165,171,0.4);
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:all .25s ease;
+  }
+  .run-btn:hover{background:rgba(232,165,171,0.12); border-color:var(--rose-300);}
+  .run-btn:focus-visible{outline:2px solid var(--gold-400); outline-offset:2px;}
+
+  /* ---- Reveal card ---- */
+  .reveal-card{
+    margin-top:22px;
+    text-align:center;
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .7s ease, transform .7s ease;
+    padding:38px 30px 34px;
+    background:linear-gradient(180deg, rgba(240,196,200,0.06), rgba(240,196,200,0.02));
+    border:1px solid rgba(232,165,171,0.15);
+    border-radius:16px;
+  }
+  .reveal-card.show{opacity:1; transform:translateY(0);}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold-400);
+  }
+  .headline{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:44px;
+    margin:10px 0 4px;
+    color:var(--cream-50);
+    line-height:1.1;
+  }
+  .headline em{
+    font-style:italic;
+    color:var(--rose-300);
+  }
+  .msg{
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    line-height:1.65;
+    color:var(--ink-mute);
+    max-width:440px;
+    margin:20px auto 0;
+  }
+  .sign{
+    margin-top:26px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--gold-400);
+  }
+  .hearts{
+    margin-top:22px;
+    font-size:20px;
+    letter-spacing:6px;
+    color:var(--rose-300);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .line{animation:none; opacity:1;}
+    .cursor{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="terminal">
+    <div class="term-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="term-title">love.py — run</span>
+    </div>
+    <div class="term-body" id="termBody"></div>
+  </div>
+
+  <div class="reveal-card" id="revealCard">
+    <div class="eyebrow">Process exited with code 0 ♥</div>
+    <h1 class="headline">Happy Birthday,<br><em>Sneha</em></h1>
+    <p class="msg">
+      Out of every function I've ever written, you're the only one that never throws an error &mdash;
+      just makes everything around it run better. Here's to another year of you: brighter, kinder,
+      and more loved than you probably know.
+    </p>
+    <div class="hearts">♡ ♡ ♡</div>
+    <div class="sign">— Kingman</div>
+  </div>
+</div>
+
+<canvas id="confetti" style="position:fixed;inset:0;pointer-events:none;"></canvas>
+
+<script>
+const lines = [
+  { html: '<span class="cm"># initializing birthday_wish.py</span>' },
+  { html: '<span class="kw">from</span> heart <span class="kw">import</span> love, gratitude' },
+  { html: '' },
+  { html: '<span class="fn">def</span> <span class="fn" style="color:#a8c9e8">celebrate</span>(name=<span class="str">"Adiba Hossain Sneha"</span>):' },
+  { html: '&nbsp;&nbsp;<span class="kw">print</span>(<span class="str">f"Happy Birthday, {name}! 🎂"</span>)' },
+  { html: '&nbsp;&nbsp;<span class="kw">return</span> love * float(<span class="str">"inf"</span>)' },
+  { html: '' },
+  { html: 'celebrate()' },
+];
+
+const term = document.getElementById('termBody');
+let delay = 150;
+lines.forEach((l, i) => {
+  const div = document.createElement('div');
+  div.className = 'line';
+  div.style.animationDelay = (i * 0.28) + 's';
+  div.innerHTML = l.html + (i === lines.length - 1 ? '' : '');
+  term.appendChild(div);
+  delay += 280;
+});
+
+// blinking cursor + run button appear after lines finish
+setTimeout(() => {
+  const cursorLine = document.createElement('div');
+  cursorLine.className = 'line';
+  cursorLine.style.animationDelay = '0s';
+  cursorLine.innerHTML = '<span class="cursor"></span>';
+  term.appendChild(cursorLine);
+
+  const btnWrap = document.createElement('div');
+  btnWrap.style.marginTop = '18px';
+  btnWrap.className = 'line';
+  btnWrap.innerHTML = '<button class="run-btn" id="runBtn">▶ run celebrate()</button>';
+  term.appendChild(btnWrap);
+
+  document.getElementById('runBtn').addEventListener('click', () => {
+    document.getElementById('revealCard').classList.add('show');
+    document.getElementById('runBtn').disabled = true;
+    document.getElementById('runBtn').style.opacity = '0.4';
+    launchConfetti();
+    document.getElementById('revealCard').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+}, delay + 200);
+
+// lightweight confetti
+function launchConfetti(){
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors = ['#e8a5ab', '#f0c4c8', '#d9ad6b', '#faf3f5'];
+  const pieces = Array.from({length: 90}, () => ({
+    x: Math.random() * canvas.width,
+    y: -20 - Math.random() * canvas.height * 0.5,
+    r: 4 + Math.random() * 5,
+    vy: 2 + Math.random() * 3,
+    vx: -1.5 + Math.random() * 3,
+    rot: Math.random() * 360,
+    vr: -6 + Math.random() * 12,
+    color: colors[Math.floor(Math.random() * colors.length)]
+  }));
+  let frames = 0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI/180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    frames++;
+    if(frames < 220){ requestAnimationFrame(draw); }
+    else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+  }
+  draw();
+}
+window.addEventListener('resize', () => {
+  const canvas = document.getElementById('confetti');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
